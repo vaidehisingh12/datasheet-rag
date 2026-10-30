@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.env
+
+# Datasheets are CC BY-NC-SA and live outside the repo anyway, but just in
+# case something gets copied in by accident:
+*.pdf
+*.tar.xz
+data/
