@@ -62,6 +62,7 @@ def main() -> None:
     print(f"indexing {len(all_chunks)} chunks...", flush=True)
     dense.reset_index()
     dense.index_chunks(all_chunks)
+    dense.close()
 
     # Keep a plain copy of the chunks around. Handy for eyeballing what the
     # chunker did, and for BM25 later, which needs the raw text.

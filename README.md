@@ -14,7 +14,8 @@ I picked datasheets because I can read them. If I can't tell whether an answer
 about a MOSFET's gate threshold voltage is right, I can't write a test set for
 it, and without a test set none of the numbers mean anything.
 
-**Status:** week 1 - corpus download, project setup. Nothing to demo yet.
+**Status:** week 1. Corpus picked (90 datasheets), parsing and chunking work,
+dense retrieval answers simple lookups. No answer generation or evaluation yet.
 
 ---
 
@@ -86,6 +87,10 @@ python -m venv ~/datasheet-rag-local/venv
 pip install -r requirements.txt
 
 python scripts/download_corpus.py                 # ~3.7 GB, resumable
+python scripts/build_manifest.py                  # pick 30 per class, extract them
+python scripts/ingest.py                          # parse, chunk, index (~2 min/doc on CPU)
+python scripts/ask.py "max collector current of the BC337"
+pytest
 ```
 
 ## Layout
@@ -93,11 +98,51 @@ python scripts/download_corpus.py                 # ~3.7 GB, resumable
 ```
 rag/
   settings.py              paths and model names
+  ingest/parse.py          PDF -> structured document (Docling), cached as JSON
+  ingest/chunk.py          section-aware chunking, tables kept whole
+  retrieval/dense.py       bge-small embeddings + local Qdrant
+  eval/metrics.py          hit@k, MRR, nDCG, bootstrap CIs, McNemar
 scripts/
   download_corpus.py       fetch + verify the Zenodo archives
+  build_manifest.py        seeded sample of datasheets -> corpus/manifest.csv
+  ingest.py                build the index from the manifest
+  ask.py                   print what retrieval returns for a question
 corpus/
-  manifest.csv             which documents are in the corpus (added in week 1)
+  manifest.csv             the 90 documents in the corpus, with source and licence
+tests/
 ```
+
+## How chunking works
+
+Fixed-size token windows are the usual default, and they're bad for
+datasheets. A window boundary in the middle of an electrical characteristics
+table leaves rows of numbers with no column headers, so you can't tell which
+number is the minimum, which is the maximum, or what the unit is. Instead:
+
+- Docling parses each PDF into headings, paragraphs and tables with their
+  cells, in reading order. OCR is off because these PDFs are born-digital, and
+  turning it on roughly triples the parse time.
+- Text is grouped by section and never crosses a heading.
+- Each table is its own chunk. Long tables are split by rows and the header
+  row is repeated in every piece.
+- Page headers and footers are dropped. They repeat on every page and add
+  nothing.
+- What gets embedded is `section | caption` followed by the chunk text, so a
+  table full of numbers still carries a hint of what it's about.
+
+## Things I've noticed so far
+
+Notes for the failure analysis. These get counted properly once the golden set
+exists.
+
+- **Heading swallowed by a table.** On a Central Semiconductor datasheet the
+  "MAXIMUM RATINGS" heading is inside the table's first header cell, so Docling
+  never sees it as a heading, and the table gets filed under the previous
+  section ("FEATURES"). Retrieval still found it this time, but section
+  filtering would miss it.
+- **Merged cells repeated.** Spanned cells come out once per column they span
+  (`Parameter | Parameter`). Harmless for retrieval, but it makes tables
+  harder to read in answers.
 
 ---
 
@@ -108,6 +153,21 @@ says why.
 
 ### Week 1
 
+- Built the corpus: 30 datasheets each of transistors, op-amps and circular
+  connectors, sampled from the dataset's dev/test splits with a fixed seed.
+  I skipped PDFs over 3 MB (mostly 100-page family catalogues).
+- Parsing, chunking and dense retrieval run end to end. First query ("max
+  collector-emitter voltage of the BC337") brings back the right absolute
+  maximum ratings table at rank 1.
+- Parsing is the bottleneck: about 2 minutes per datasheet on this CPU, so
+  about 3 hours for the corpus. It only runs once because output is cached.
+- **Plan change: Qdrant in embedded mode, not pgvector.** Docker isn't on this
+  machine and I don't need it until week 6. Qdrant's client can run as a local
+  folder with metadata filtering, and switching to a Qdrant server later is a
+  one-line change. pgvector would have meant installing Postgres now.
+- **Plan change: stayed on Python 3.13.** I was going to use a 3.12 virtual
+  environment in case libraries lagged behind, but everything (Docling, torch,
+  sentence-transformers, qdrant-client) installs and runs on 3.13.
 - Set up the repo and the download script. Zenodo publishes MD5s for each
   archive, so the script checks them and resumes interrupted downloads.
 - **Plan change: smaller corpus.** The first draft said 150-250 datasheets.

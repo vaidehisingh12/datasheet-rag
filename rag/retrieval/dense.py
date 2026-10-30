@@ -41,6 +41,13 @@ def get_client() -> QdrantClient:
     return QdrantClient(path=str(INDEX_DIR))
 
 
+def close() -> None:
+    # Local-mode Qdrant complains loudly if it's left to close itself while
+    # Python is shutting down, so scripts call this on the way out.
+    get_client().close()
+    get_client.cache_clear()
+
+
 def _point_id(chunk_id: str) -> str:
     # Qdrant wants an int or a UUID. Deriving the UUID from the chunk ID means
     # re-indexing a document overwrites its old points instead of duplicating.
