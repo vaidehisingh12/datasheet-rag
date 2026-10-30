@@ -61,7 +61,7 @@ def reset_index() -> None:
     client.create_collection(
         COLLECTION,
         vectors_config=VectorParams(
-            size=get_model().get_sentence_embedding_dimension(),
+            size=get_model().get_embedding_dimension(),
             distance=Distance.COSINE,
         ),
     )

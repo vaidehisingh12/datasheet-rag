@@ -140,6 +140,12 @@ exists.
   never sees it as a heading, and the table gets filed under the previous
   section ("FEATURES"). Retrieval still found it this time, but section
   filtering would miss it.
+- **Parser segfault.** The first full ingest died with a segfault on document
+  8 after parsing fine for a while. The same PDF parsed without trouble on its
+  own, so it's something going wrong inside Docling's native code over a long
+  run, not a bad file. Parsing now runs in a worker process that gets
+  restarted if it dies. A document that crashes it twice is skipped and
+  listed in `ingest_failures.json`.
 - **Merged cells repeated.** Spanned cells come out once per column they span
   (`Parameter | Parameter`). Harmless for retrieval, but it makes tables
   harder to read in answers.
