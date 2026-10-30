@@ -102,7 +102,12 @@ rag/
   ingest/chunk.py          section-aware chunking, tables kept whole
   retrieval/dense.py       bge-small embeddings + local Qdrant
   eval/metrics.py          hit@k, MRR, nDCG, bootstrap CIs, McNemar
+eval/
+  golden_template.csv      format + three worked examples
+  golden.csv               the real question set (in progress)
+  results/                 per-question results of each scored run
 scripts/
+  eval_retrieval.py        score retrieval against the golden set, compare runs
   download_corpus.py       fetch + verify the Zenodo archives
   build_manifest.py        seeded sample of datasheets -> corpus/manifest.csv
   ingest.py                build the index from the manifest
@@ -111,6 +116,27 @@ corpus/
   manifest.csv             the 90 documents in the corpus, with source and licence
 tests/
 ```
+
+## Golden set
+
+Hand-written questions live in `eval/golden.csv`, one row per question.
+`eval/golden_template.csv` has three worked examples showing the format:
+
+| Column | Meaning |
+|--------|---------|
+| `answerable` | `yes` or `no`. Unanswerable questions are scored on whether the system refuses, not on retrieval. |
+| `answer` | The correct answer, written from the datasheet, not from the system's output. |
+| `doc_id`, `pages` | Where the answer is (pages separated by `;`). A retrieved chunk counts as a hit if it's from that document and covers one of those pages. |
+| `question_type` | `lookup`, `comparison`, `multi-hop` or `unanswerable`, so results can be broken down later. |
+| `notes` | What makes the question tricky. Useful when sorting failures. |
+
+```bash
+python scripts/eval_retrieval.py run dense              # score, save eval/results/dense.json
+python scripts/eval_retrieval.py compare dense hybrid   # paired deltas + McNemar
+```
+
+Matching on (document, page) rather than chunk IDs means the golden set
+doesn't have to be rewritten every time the chunker changes.
 
 ## How chunking works
 
@@ -146,6 +172,14 @@ exists.
   run, not a bad file. Parsing now runs in a worker process that gets
   restarted if it dies. A document that crashes it twice is skipped and
   listed in `ingest_failures.json`.
+- **Part numbers get lost in dense search.** With 3 documents indexed, "max
+  VCEO of the BC337" put the right table at rank 1. With 10 documents
+  indexed, it dropped to rank 4: every transistor has a near-identical
+  absolute maximum ratings table, and the embedding model doesn't weight the
+  exact string "BC337". This is the main reason to add BM25 keyword search.
+- **Boilerplate tables.** Some vendors finish with a page-long trademark table
+  that becomes chunks full of brand names. They haven't caused a wrong hit
+  yet, but they're worth filtering if they start to.
 - **Merged cells repeated.** Spanned cells come out once per column they span
   (`Parameter | Parameter`). Harmless for retrieval, but it makes tables
   harder to read in answers.

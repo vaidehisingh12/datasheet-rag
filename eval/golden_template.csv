@@ -1,0 +1,4 @@
+id,question,answerable,answer,doc_id,pages,component_class,question_type,notes
+ex-01,What is the maximum collector-emitter voltage (VCEO) of the BC337?,yes,45 V,transistor-BC337,1,transistor,lookup,Absolute maximum ratings table. BC338 is 25 V in the same table - easy to mix up.
+ex-02,What is the minimum DC current gain of a BC337-25 at VCE = 1 V and IC = 100 mA?,yes,160,transistor-BC337,2,transistor,lookup,Needs the hFE classification table not the main electrical characteristics table (which gives 100 for the whole family).
+ex-03,What is the maximum collector current of the BC337 in a SOT-23 package?,no,,,,transistor,unanswerable,The datasheet only covers TO-92. A good answer says so instead of quoting 800 mA.
