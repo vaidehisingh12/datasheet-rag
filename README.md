@@ -14,8 +14,9 @@ I picked datasheets because I can read them. If I can't tell whether an answer
 about a MOSFET's gate threshold voltage is right, I can't write a test set for
 it, and without a test set none of the numbers mean anything.
 
-**Status:** week 1. Corpus picked (90 datasheets), parsing and chunking work,
-dense retrieval answers simple lookups. No answer generation or evaluation yet.
+**Status:** end of week 1. Corpus picked (90 datasheets), the full parse is
+running, and retrieval scoring is ready. Writing the golden set comes next. No
+answer generation yet.
 
 ---
 
@@ -88,7 +89,7 @@ pip install -r requirements.txt
 
 python scripts/download_corpus.py                 # ~3.7 GB, resumable
 python scripts/build_manifest.py                  # pick 30 per class, extract them
-python scripts/ingest.py                          # parse, chunk, index (~2 min/doc on CPU)
+python scripts/ingest.py                          # parse, chunk, index (~2 min/doc on CPU, resumable)
 python scripts/ask.py "max collector current of the BC337"
 pytest
 ```
@@ -104,7 +105,7 @@ rag/
   eval/metrics.py          hit@k, MRR, nDCG, bootstrap CIs, McNemar
 eval/
   golden_template.csv      format + three worked examples
-  golden.csv               the real question set (in progress)
+  golden.csv               the real question set (not started yet)
   results/                 per-question results of each scored run
 scripts/
   eval_retrieval.py        score retrieval against the golden set, compare runs
@@ -137,6 +138,22 @@ python scripts/eval_retrieval.py compare dense hybrid   # paired deltas + McNema
 
 Matching on (document, page) rather than chunk IDs means the golden set
 doesn't have to be rewritten every time the chunker changes.
+
+How I'm writing it:
+
+- Questions come from reading the PDFs, never from looking at what the system
+  retrieves. Otherwise the test set ends up measuring things the system is
+  already good at.
+- About 20 answerable and 5 unanswerable questions per component class, so no
+  class dominates the averages.
+- A mix of types: mostly lookups, some that need a specific variant or test
+  condition (BC337-25 vs BC337-40, hFE at 100 mA vs 300 mA), some comparisons
+  across two datasheets, and a few that need information from two places in
+  one document.
+- Unanswerable questions should be plausible: right component, wrong package,
+  a parameter the datasheet doesn't specify, or a part number that isn't in
+  the corpus. They test whether the system refuses rather than confidently
+  quoting the nearest number.
 
 ## How chunking works
 
@@ -193,6 +210,17 @@ says why.
 
 ### Week 1
 
+- The second full parse was killed partway through (18/90) when the laptop
+  ran low on memory. Each Docling worker uses over 1 GB on top of everything
+  else running. Because parsed files are cached, the rerun picked up at
+  document 19 instead of starting again. Running it in its own terminal with
+  other heavy apps closed keeps it going.
+- Added the golden set template and `eval_retrieval.py`. A quick check on 10
+  indexed documents showed dense search dropping the right BC337 table from
+  rank 1 to rank 4 once more transistors were in the index (see "Things I've
+  noticed so far").
+- The first full parse segfaulted inside Docling on document 8. Moved parsing
+  into a restartable worker process (details in "Things I've noticed so far").
 - Built the corpus: 30 datasheets each of transistors, op-amps and circular
   connectors, sampled from the dataset's dev/test splits with a fixed seed.
   I skipped PDFs over 3 MB (mostly 100-page family catalogues).
