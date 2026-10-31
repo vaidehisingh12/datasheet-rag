@@ -95,6 +95,21 @@ def test_split_table_keeps_oversized_row():
     assert len(pieces) == 1 and pieces[0].startswith("h\n")
 
 
+def test_long_paragraph_is_split_at_sentences():
+    doc = DoclingDocument(name="long")
+    doc.add_heading(text="Layout", prov=prov(5))
+    sentence = "Keep the feedback trace short and away from the output stage."
+    doc.add_text(label=DocItemLabel.TEXT, text=" ".join([sentence] * 40), prov=prov(5))
+
+    chunks = chunk_document(doc, "t", "opamp", max_tokens=60)
+
+    assert len(chunks) > 1
+    for c in chunks:
+        assert approx_tokens(c.text) <= 60
+        assert c.text.endswith(".")  # never cut mid-sentence
+        assert c.section == "Layout" and c.pages == [5]
+
+
 def test_embed_text_puts_context_first():
     table = next(c for c in chunk_document(sample_doc(), "t", "transistor") if c.kind == "table")
     first_line = table.embed_text().splitlines()[0]

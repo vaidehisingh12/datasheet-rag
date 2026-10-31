@@ -18,6 +18,7 @@ import argparse
 import csv
 import random
 import re
+import shutil
 import sys
 import tarfile
 from pathlib import Path, PurePosixPath
@@ -39,6 +40,24 @@ CLASSES = {
 # anything over this size.
 MAX_PDF_BYTES = 3_000_000
 SEED = 4558344  # the Zenodo record number, so it's easy to remember
+
+# Picked by the sampler but no use for a question set. Each one is replaced by
+# a document drawn with a separate random generator (REPLACEMENT_SEED), so
+# excluding something never changes the other picks - and never forces a
+# re-parse of the documents that were already fine.
+EXCLUDE = {
+    "amphenolsinesystemscorp_rt0w7106snh-k":
+        "mechanical drawing; only text is the title block",
+    "amphenolsinesystemscorp_rt0w71626pnh-k":
+        "mechanical drawing; only text is the title block",
+    "teconnectivityampconnectors_213597-4":
+        "scanned drawing with no text layer; OCR output is garbled",
+}
+REPLACEMENT_SEED = SEED + 1
+# A replacement has to have a real text layer, so the same problem can't come
+# straight back. Datasheets in the corpus have a few thousand characters even
+# on one page; the drawings above have under 900.
+MIN_REPLACEMENT_TEXT_CHARS = 2000
 
 
 def list_candidates(archive: Path) -> dict[str, dict]:
@@ -80,6 +99,42 @@ def extract(archive: Path, wanted: dict[str, str]) -> None:
                     dst.write(src.read())
 
 
+def text_chars(pdf: Path) -> int:
+    """How much text the PDF's own text layer holds (no OCR)."""
+    import pypdfium2 as pdfium  # comes with Docling
+
+    doc = pdfium.PdfDocument(pdf)
+    try:
+        return sum(len(page.get_textpage().get_text_range()) for page in doc)
+    finally:
+        doc.close()
+
+
+def pick_replacements(archive: Path, cls: str, pool: list[str], candidates: dict,
+                      needed: int) -> list[str]:
+    """
+    Take documents from `pool` in order, skipping any without a usable text
+    layer. Checking means extracting the PDF, so a handful of spares are
+    pulled out to a scratch folder and checked there.
+    """
+    chosen: list[str] = []
+    scratch = RAW_DIR / "_replacement_check"
+    for start in range(0, len(pool), 10):
+        batch = pool[start:start + 10]
+        extract(archive, {candidates[s]["pdf"]: scratch / f"{s}.pdf" for s in batch})
+        for stem in batch:
+            chars = text_chars(scratch / f"{stem}.pdf")
+            if chars >= MIN_REPLACEMENT_TEXT_CHARS:
+                chosen.append(stem)
+            else:
+                print(f"{cls}: replacement {stem} skipped, only {chars} chars of text")
+            if len(chosen) == needed:
+                shutil.rmtree(scratch)
+                return chosen
+    shutil.rmtree(scratch, ignore_errors=True)
+    raise SystemExit(f"{cls}: ran out of candidates with a usable text layer")
+
+
 def make_doc_id(cls: str, stem: str) -> str:
     # Filenames have brackets, spaces etc. Keep IDs boring and filesystem-safe.
     return f"{cls}-{re.sub(r'[^A-Za-z0-9]+', '_', stem).strip('_')}"
@@ -103,6 +158,17 @@ def main() -> None:
         # Sort before sampling so the result doesn't depend on archive order.
         picked = rng.sample(sorted(candidates), min(args.per_class, len(candidates)))
         print(f"{cls}: {len(candidates)} candidates, picked {len(picked)}")
+
+        dropped = [s for s in picked if s in EXCLUDE]
+        if dropped:
+            picked = [s for s in picked if s not in EXCLUDE]
+            for stem in dropped:
+                print(f"{cls}: excluded {stem} ({EXCLUDE[stem]})")
+            pool = [s for s in sorted(candidates) if s not in picked and s not in EXCLUDE]
+            random.Random(REPLACEMENT_SEED).shuffle(pool)
+            replacements = pick_replacements(archive, cls, pool, candidates, len(dropped))
+            print(f"{cls}: replaced with {', '.join(replacements)}")
+            picked += replacements
 
         wanted = {}
         for stem in sorted(picked):

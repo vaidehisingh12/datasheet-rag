@@ -194,6 +194,23 @@ exists.
   indexed, it dropped to rank 4: every transistor has a near-identical
   absolute maximum ratings table, and the embedding model doesn't weight the
   exact string "BC337". This is the main reason to add BM25 keyword search.
+- **Drawings aren't datasheets.** Three of the sampled connectors produced no
+  chunks at all. Two Amphenol files are mechanical drawings: Docling read
+  each page as one big picture, and the only real text was the title block
+  (tolerances, signature boxes, a copyright notice). One TE file is a scanned
+  drawing with no text layer. OCR could read it but produced things like
+  "VY_ON" for NYLON. I excluded all three and drew replacements (see the
+  progress log).
+- **Some chunks were too long for the embedder.** 10 of 2,867 chunks went over
+  bge-small's 512-token limit, so their ends were silently cut off. Most were
+  revision-history tables, which nobody will ask about. One was a
+  700-token paragraph of PCB layout advice in a TI op-amp datasheet, which the
+  chunker had kept whole. Long paragraphs are now split at sentence ends.
+  Nine table chunks are still over the limit. Each is a table where a single
+  row is bigger than the budget: eight TI revision-history tables (Docling
+  put the whole change list in one row) and a transistor cross-reference
+  list. Splitting inside a row would take more work than those tables are
+  worth.
 - **Boilerplate tables.** Some vendors finish with a page-long trademark table
   that becomes chunks full of brand names. They haven't caused a wrong hit
   yet, but they're worth filtering if they start to.
@@ -210,6 +227,22 @@ says why.
 
 ### Week 1
 
+- Index rebuilt with the replacements: 90 documents, 2,923 chunks (1,004
+  tables), every document contributing at least a few chunks. The parser
+  crashed once on a replacement (Windows access violation), and the worker
+  restart picked it up on the second try, as intended.
+- Full parse finished: 90 documents, 2,867 chunks, 976 of them tables.
+  Parse times varied a lot by class: connectors took 2-80 s each (mostly one
+  or two pages), op-amps 45-460 s (long TI datasheets full of graphs and
+  tables).
+- **Plan change: three connector drawings swapped out.** Checking the output
+  turned up three documents with nothing to retrieve (see "Drawings aren't
+  datasheets"). Rather than keep them and inflate the failure count with
+  documents nobody could write a question about, I excluded them in
+  `build_manifest.py` with the reason written next to each one. Replacements
+  come from a separately seeded draw and must have at least 2,000 characters
+  of real text. The other 87 documents didn't change, so they didn't need
+  re-parsing.
 - The second full parse was killed partway through (18/90) when the laptop
   ran low on memory. Each Docling worker uses over 1 GB on top of everything
   else running. Because parsed files are cached, the rerun picked up at

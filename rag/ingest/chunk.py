@@ -16,6 +16,7 @@ parameter or unit they belong to. So the rules here are:
     component class.
 """
 
+import re
 from dataclasses import dataclass, field
 from typing import Callable
 
@@ -105,6 +106,27 @@ def split_table(header: str, rows: list[str], count: Callable[[str], int],
     return pieces
 
 
+def split_long_text(text: str, count: Callable[[str], int], max_tokens: int) -> list[str]:
+    """
+    Break a paragraph that's over budget into pieces at sentence ends. Most
+    paragraphs fit, but application notes inside datasheets sometimes run to
+    700+ tokens, and the embedding model silently drops everything past 512.
+    """
+    if count(text) <= max_tokens:
+        return [text]
+    sentences = re.split(r"(?<=[.!?])\s+", text)
+    pieces, current = [], ""
+    for sentence in sentences:
+        candidate = f"{current} {sentence}".strip()
+        if current and count(candidate) > max_tokens:
+            pieces.append(current)
+            current = sentence
+        else:
+            current = candidate
+    pieces.append(current)
+    return pieces
+
+
 def chunk_document(doc: DoclingDocument, doc_id: str, component_class: str,
                    count: Callable[[str], int] = approx_tokens,
                    max_tokens: int = MAX_TOKENS) -> list[Chunk]:
@@ -163,12 +185,12 @@ def chunk_document(doc: DoclingDocument, doc_id: str, component_class: str,
             section = item.text.strip()
             continue
 
-        text = item.text.strip()
-        if buffer and count("\n".join([*buffer, text])) > max_tokens:
-            flush()
-        buffer.append(text)
-        if page:
-            buffer_pages.append(page)
+        for text in split_long_text(item.text.strip(), count, max_tokens):
+            if buffer and count("\n".join([*buffer, text])) > max_tokens:
+                flush()
+            buffer.append(text)
+            if page:
+                buffer_pages.append(page)
 
     flush()
     return chunks
