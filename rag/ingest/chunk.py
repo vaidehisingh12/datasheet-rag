@@ -14,6 +14,10 @@ parameter or unit they belong to. So the rules here are:
   * Every chunk records where it came from (document, page, section, table
     caption), so answers can cite a page and retrieval can filter by
     component class.
+  * Text that Docling places inside a figure is mostly axis labels, which are
+    skipped. Figure titles, footnotes and full sentences are kept, because
+    datasheets put real notes inside drawings ("SD-130 has solid solder
+    pins").
 """
 
 import re
@@ -35,6 +39,9 @@ MAX_TOKENS = 400
 # and would just add noise to every chunk.
 SKIP_LABELS = {DocItemLabel.PAGE_HEADER, DocItemLabel.PAGE_FOOTER}
 HEADING_LABELS = {DocItemLabel.TITLE, DocItemLabel.SECTION_HEADER}
+
+# Inside a figure, these labels are always worth keeping.
+FIGURE_KEEP_LABELS = {DocItemLabel.CAPTION, DocItemLabel.FOOTNOTE, DocItemLabel.LIST_ITEM}
 
 
 def approx_tokens(text: str) -> int:
@@ -127,6 +134,19 @@ def split_long_text(text: str, count: Callable[[str], int], max_tokens: int) -> 
     return pieces
 
 
+def worth_keeping_from_figure(item: TextItem) -> bool:
+    """
+    About 18% of all text in the corpus sits inside figures, and nearly all
+    of it is graph furniture: tick values ("100k", "-30") and axis titles
+    ("f - Frequency - Hz"). Those almost never end in a full stop. Notes
+    and warnings written into a drawing do, so that's the test.
+    """
+    if item.label in FIGURE_KEEP_LABELS:
+        return True
+    text = item.text.strip()
+    return len(text.split()) >= 3 and text[-1] in ".!?"
+
+
 def chunk_document(doc: DoclingDocument, doc_id: str, component_class: str,
                    count: Callable[[str], int] = approx_tokens,
                    max_tokens: int = MAX_TOKENS) -> list[Chunk]:
@@ -163,8 +183,26 @@ def chunk_document(doc: DoclingDocument, doc_id: str, component_class: str,
             buffer.clear()
             buffer_pages.clear()
 
-    for item, _level in doc.iterate_items():
+    # The default walk skips everything inside pictures. Walk them too, but
+    # remember what's outside so figure text can be filtered separately.
+    outside_figures = {item.self_ref for item, _ in doc.iterate_items()}
+
+    for item, _level in doc.iterate_items(traverse_pictures=True):
         if item.label in SKIP_LABELS or item.self_ref in table_captions:
+            continue
+
+        in_figure = item.self_ref not in outside_figures
+        if in_figure and isinstance(item, TextItem):
+            if not worth_keeping_from_figure(item):
+                continue
+            # A heading inside a figure is a plot title, not a new section,
+            # so it goes in with the text instead of changing `section`.
+            item_text = item.text.strip()
+            if buffer and count("\n".join([*buffer, item_text])) > max_tokens:
+                flush()
+            buffer.append(item_text)
+            if _page_of(item):
+                buffer_pages.append(_page_of(item))
             continue
 
         page = _page_of(item)

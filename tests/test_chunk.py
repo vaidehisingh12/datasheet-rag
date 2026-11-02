@@ -110,6 +110,25 @@ def test_long_paragraph_is_split_at_sentences():
         assert c.section == "Layout" and c.pages == [5]
 
 
+def test_notes_inside_figures_are_kept_but_axis_labels_are_not():
+    doc = DoclingDocument(name="SD")
+    doc.add_heading(text="Mechanical Assembly", prov=prov(4))
+    figure = doc.add_picture(prov=prov(4))
+    for text in ["0", "100k", "f - Frequency - Hz",
+                 "Note: SD-130 has solid solder pins.", "All other models have solder cups."]:
+        doc.add_text(label=DocItemLabel.TEXT, text=text, parent=figure, prov=prov(4))
+    doc.add_text(label=DocItemLabel.SECTION_HEADER, text="GAIN vs FREQUENCY", parent=figure, prov=prov(4))
+
+    chunks = chunk_document(doc, "c", "connector")
+
+    assert len(chunks) == 1
+    text = chunks[0].text
+    assert "SD-130 has solid solder pins" in text and "solder cups" in text
+    assert "100k" not in text and "Frequency" not in text
+    # a heading inside a figure is a plot title, not a new section
+    assert chunks[0].section == "Mechanical Assembly"
+
+
 def test_embed_text_puts_context_first():
     table = next(c for c in chunk_document(sample_doc(), "t", "transistor") if c.kind == "table")
     first_line = table.embed_text().splitlines()[0]

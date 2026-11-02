@@ -14,9 +14,10 @@ I picked datasheets because I can read them. If I can't tell whether an answer
 about a MOSFET's gate threshold voltage is right, I can't write a test set for
 it, and without a test set none of the numbers mean anything.
 
-**Status:** end of week 1. Corpus picked (90 datasheets), the full parse is
-running, and retrieval scoring is ready. Writing the golden set comes next. No
-answer generation yet.
+**Status:** week 2. Corpus indexed (90 datasheets, 2,961 chunks), retrieval
+scoring works, and an 85-question golden set is drafted and being checked.
+Next: dense baseline numbers, then BM25 and a reranker. No answer generation
+yet.
 
 ---
 
@@ -105,7 +106,7 @@ rag/
   eval/metrics.py          hit@k, MRR, nDCG, bootstrap CIs, McNemar
 eval/
   golden_template.csv      format + three worked examples
-  golden.csv               the real question set (not started yet)
+  golden.csv               the real question set (drafted, being checked)
   results/                 per-question results of each scored run
 scripts/
   eval_retrieval.py        score retrieval against the golden set, compare runs
@@ -211,6 +212,16 @@ exists.
   put the whole change list in one row) and a transistor cross-reference
   list. Splitting inside a row would take more work than those tables are
   worth.
+- **Text inside figures was being dropped.** A golden-set question about a
+  CUI connector note ("SD-130 has solid solder pins") could never be
+  answered, because the note wasn't in any chunk. Docling had kept it, but
+  attached it to a drawing, and the chunker's default walk over the
+  document skips everything inside pictures. That was 18.6% of all
+  extracted text, in 76 of 90 documents. Most of it is graph axis labels
+  ("100k", "f - Frequency - Hz"), so including all of it would add noise.
+  The chunker now keeps figure captions, footnotes, list items, and any
+  figure text that is a full sentence. That added 38 chunks and fixed the
+  question without breaking any others.
 - **Boilerplate tables.** Some vendors finish with a page-long trademark table
   that becomes chunks full of brand names. They haven't caused a wrong hit
   yet, but they're worth filtering if they start to.
@@ -224,6 +235,19 @@ exists.
 
 Newest first. Any change to the original plan is marked **Plan change** and
 says why.
+
+### Week 2
+
+- Drafted the golden set: 85 questions, 70 answerable and 15 unanswerable,
+  roughly a third per component class (59 lookups, 7 comparisons, 4 multi-hop,
+  15 unanswerable). Answers and page numbers come from the PDFs' own text,
+  not from what the retriever returns. It's being checked against each PDF
+  before it's committed, so no scores are published yet.
+- A trial scoring run turned up a chunker bug before any retrieval tuning:
+  text inside figures was being skipped (see "Things I've noticed so far").
+  Checked the other misses as well. Every page number in the golden set
+  matches where that text actually ended up in the index, so the rest are
+  real retrieval misses, not labelling mistakes.
 
 ### Week 1
 
