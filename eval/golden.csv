@@ -1,0 +1,86 @@
+id,question,answerable,answer,doc_id,pages,component_class,question_type,notes
+t01,What is the maximum collector-emitter voltage (VCEO) of the BC337?,yes,45 V,transistor-BC337,1,transistor,lookup,Absolute maximum ratings table. BC338 is 25 V in the same table.
+t02,What is the minimum DC current gain of a BC337-25 at VCE = 1 V and IC = 100 mA?,yes,160,transistor-BC337,2,transistor,lookup,Needs the hFE classification table. The main electrical characteristics table gives 100 for the whole family.
+t03,What is the maximum power dissipation of the BC337 at an ambient temperature of 50 °C?,yes,500 mW (625 mW at 25 °C derated by 5.0 mW/°C for 25 °C),transistor-BC337,2,transistor,multi-hop,Not stated directly. Needs PD and the derating factor from the thermal characteristics table and a calculation.
+t04,How does the VCES rating of the BC337 compare with the BC338?,yes,"BC337: 50 V, BC338: 30 V",transistor-BC337,1,transistor,comparison,Both variants are in one table with the part name in a separate column.
+t05,What package is the CMLT3820G in and what is its marking code?,yes,"SOT-563, marking code 38G",transistor-CentralSemiconductorCorp_CMLT3820GTR,1,transistor,lookup,
+t06,What is the maximum VCE(sat) of the CMLT3820G at IC = 1.0 A and IB = 100 mA?,yes,0.28 V,transistor-CentralSemiconductorCorp_CMLT3820GTR,1,transistor,lookup,Three VCE(sat) rows at different currents. The 0.115 V and 0.15 V rows are wrong answers.
+t07,What is the complementary PNP device for the CMLT3820G?,yes,CMLT7820G,transistor-CentralSemiconductorCorp_CMLT3820GTR,1,transistor,lookup,Only mentioned in the features list.
+t08,What are the collector-base voltage ratings of the CMST3904 and the CMST3906?,yes,"CMST3904: 60 V, CMST3906: 40 V",transistor-CentralSemiconductorCorp_CMST3904BK,1,transistor,comparison,One datasheet covers the NPN and PNP parts in side-by-side columns.
+t09,What is the maximum storage time (ts) of the CMST3906?,yes,225 ns,transistor-CentralSemiconductorCorp_CMST3904BK,2,transistor,lookup,Continued table on page 2. The CMST3904 value next to it is 200 ns.
+t10,Which pin of the CMST3904 in the SOT-323 package is the base?,yes,"Pin 1 (2 = emitter, 3 = collector)",transistor-CentralSemiconductorCorp_CMST3904BK,2,transistor,lookup,Lead codes on page 2.
+t11,What is the maximum continuous collector current of the 2SC4886?,yes,14 A,transistor-Sanken_2SC4886,1,transistor,lookup,Single-page Sanken sheet where the ratings table text is flattened into columns.
+t12,What hFE range does rank Y of the 2SC4886 cover?,yes,90 to 180,transistor-Sanken_2SC4886,1,transistor,lookup,"Footnote at the bottom of the page: O 50-100, P 70-140, Y 90-180."
+t13,What is the complementary type of the 2SC4886 and what package is it in?,yes,2SA1860; FM100 (TO3PF) package,transistor-Sanken_2SC4886,1,transistor,multi-hop,The complement is in the title line and the package is in the dimensions drawing label.
+t14,What package is the BC141-16 in and what is its maximum operating junction temperature?,yes,"TO-39 metal case, 175 °C",transistor-STMicroelectronics_BC14116,1,transistor,lookup,
+t15,What is the junction-to-case thermal resistance of the BC141-16?,yes,35 °C/W max,transistor-STMicroelectronics_BC14116,2,transistor,lookup,Junction-to-ambient (200 °C/W) is in the same table.
+t16,What is the turn-off time of the BC141-16 at IC = 100 mA?,yes,850 ns (IB1 = IB2 = 5 mA),transistor-STMicroelectronics_BC14116,2,transistor,lookup,
+t17,"Is the MJD2955 NPN or PNP, and what does the T4 suffix mean?",yes,PNP (complement of the NPN MJD3055); T4 means DPAK (TO-252) in tape and reel,transistor-STMicroelectronics_MJD2955T4,1,transistor,lookup,Datasheet covers both parts. Voltages and currents are negative for the PNP type.
+t18,What is the DC current gain range of the MJD2955 at IC = 4 A and VCE = 4 V?,yes,20 to 100,transistor-STMicroelectronics_MJD2955T4,2,transistor,lookup,At 10 A the minimum drops to 5.
+t19,What is the junction-to-case thermal resistance of the MJD2955?,yes,6.25 °C/W max,transistor-STMicroelectronics_MJD2955T4,2,transistor,lookup,
+t20,"What peak avalanche current can the ZTX415 handle, and at what pulse width?",yes,60 A at a 20 ns pulse width,transistor-DiodesIncorporated_ZTX415STZ,1;2,transistor,lookup,"The PDF repeats page 1 as page 2, so either page counts."
+t21,What applications is the ZTX415 avalanche transistor intended for?,yes,"Laser LED drivers, fast edge generation and high-speed pulse generators",transistor-DiodesIncorporated_ZTX415STZ,1;2,transistor,lookup,Answer is a list.
+t22,What hFE range does the Y classification of the KSC2310 cover?,yes,120 to 240,transistor-FairchildSemiconductor_KSC2310YTA,1,transistor,lookup,R is 40-80 and O is 70-140. The part in the corpus is the YTA variant.
+t23,What is the pin order of the KSC2310 in the TO-92L package?,yes,"1 = emitter, 2 = collector, 3 = base",transistor-FairchildSemiconductor_KSC2310YTA,1,transistor,lookup,
+t24,What is the maximum collector current of the BC337 in a SOT-23 package?,no,,,,transistor,unanswerable,The datasheet only covers TO-92. A good answer says so instead of quoting 800 mA.
+t25,What is the gate threshold voltage of the KSC2310?,no,,,,transistor,unanswerable,The KSC2310 is a bipolar transistor and has no gate. Should not quote VBE or VCE(sat).
+t26,What is the maximum collector current of the 2N2222A?,no,,,,transistor,unanswerable,2N2222A only appears in the ON Semiconductor replacement list (replaced by MPS2222A) with no ratings. Retrieval will probably find that table.
+t27,What is the collector-emitter voltage rating of the ZTX415 at 200 °C?,no,,,,transistor,unanswerable,Operating range stops at +175 °C.
+t28,Is the MJD2955 AEC-Q101 qualified?,no,,,,transistor,unanswerable,The datasheet doesn't mention automotive qualification either way.
+o01,What is the maximum input offset voltage of the OP07D at 25 °C?,yes,150 µV,opamp-op07d,1;4,opamp,lookup,Also in the part's title. It rises to 250 µV (0-70 °C) and 350 µV (-40 to +125 °C) over temperature.
+o02,What is the supply current per amplifier of the OP07D at ±5 V?,yes,"1.1 mA typical, 1.25 mA max",opamp-op07d,4,opamp,lookup,"PDF page 4 is printed page 3, because ADI inserts a product page as PDF page 2."
+o03,What is the gain bandwidth product of the OP07D at ±5 V supplies?,yes,0.6 MHz,opamp-op07d,4,opamp,lookup,A separate ±15 V table follows on the next page.
+o04,What is the voltage noise density of the OP07D at 1 kHz with ±5 V supplies?,yes,10 nV/√Hz,opamp-op07d,4,opamp,lookup,Peak-to-peak noise (0.28 µV p-p) is a different row.
+o05,Which pins are the output and the offset null pins on the 8-lead OP07D?,yes,Output is pin 6; offset null is pins 1 and 8,opamp-op07d,1,opamp,lookup,Only in the pin configuration figure text.
+o06,What gain resistor RG gives the INA114 a gain of 100?,yes,About 505 Ω (G = 1 + 50 kΩ/RG),opamp-ina114,1;2,opamp,multi-hop,Needs the gain equation and a calculation. The datasheet may also have a gain/RG table further in.
+o07,What is the minimum common-mode rejection of the INA114BP at G = 1000?,yes,115 dB,opamp-ina114,2,opamp,lookup,The AP/AU grade minimum is 106 dB in the next column.
+o08,What is the -3 dB bandwidth of the INA114 at a gain of 100?,yes,10 kHz,opamp-ina114,2,opamp,lookup,
+o09,How does the maximum initial offset voltage of the INA114BP compare with the INA114AP?,yes,"BP: ±(50 + 100/G) µV, AP: ±(125 + 500/G) µV",opamp-ina114,2,opamp,comparison,Answer depends on gain. Both grades are in one table.
+o10,What packages is the INA114 available in?,yes,8-pin plastic DIP and SOL-16 surface mount,opamp-ina114,1,opamp,lookup,
+o11,What is the current limit range of the PA51M at 25 °C?,yes,5 A min to 7.9 A max,opamp-pa51mu,1,opamp,lookup,"This is a MIL /883 Group A inspection sheet, not a normal datasheet."
+o12,How does the maximum quiescent current of the PA51M at 125 °C compare with 25 °C?,yes,13 mA at 125 °C vs 10 mA at 25 °C,opamp-pa51mu,1,opamp,comparison,Rows for different temperatures are interleaved by subgroup.
+o13,What is the maximum input bias current of the OPA129PB compared with the OPA129P?,yes,"OPA129PB: ±100 fA, OPA129P: ±250 fA",opamp-opa129,2,opamp,comparison,The two grades are in one table.
+o14,Why do pins 1 and 4 of the OPA129 have no internal connection?,yes,"So guard traces can be run around the inputs to stop board leakage current, even on the SO package",opamp-opa129,1,opamp,lookup,A 'why' question answered in the description text.
+o15,What is the junction-to-ambient thermal resistance of the OPA129 in the SO-8 package?,yes,100 °C/W,opamp-opa129,2,opamp,lookup,DIP-8 is 90 °C/W in the same table.
+o16,What is the input voltage noise of the OPA129 at 1 kHz?,yes,17 nV/√Hz,opamp-opa129,2,opamp,lookup,"Features list gives 15 nV/√Hz at 10 kHz, which is the wrong frequency."
+o17,What is the gain bandwidth product and supply current per op amp of the MIC916?,yes,"135 MHz, 2.4 mA per op amp",opamp-mic916,1,opamp,lookup,
+o18,How many amplifiers does the MIC916 contain and what package is it in?,yes,"Three (triple op amp), QSOP-16",opamp-mic916,1,opamp,lookup,
+o19,What must be done with the V- pins of the MIC916?,yes,"They must be shorted together externally (pins 11, 14 and 16)",opamp-mic916,1;2,opamp,multi-hop,The instruction is a footnote under the pin diagram. The pin numbers are in the pin table on page 2.
+o20,What is the package thermal resistance of the MIC916?,yes,260 °C/W,opamp-mic916,3,opamp,lookup,
+o21,What is the fixed gain of the AD8209 and how is it split between its stages?,yes,14 V/V: preamp A1 has a gain of 7 and output amp A2 a gain of 2,opamp-ad8209,1,opamp,lookup,Stage gains only appear in the block diagram text.
+o22,What common-mode voltage range can the AD8209 operate over and survive?,yes,"Operating -2 V to +45 V, survival -24 V to +80 V",opamp-ad8209,1,opamp,lookup,
+o23,What is the operating temperature range of the AD8209 WH grade?,yes,-40 °C to +150 °C,opamp-ad8209,1,opamp,lookup,WB grade is -40 °C to +125 °C.
+o24,What is the slew rate of the OP07D on ±30 V supplies?,no,,,,opamp,unanswerable,Supply range only goes to ±18 V. Should not quote the ±15 V figure.
+o25,Is the INA114 available in a SOT-23 package?,no,,,,opamp,unanswerable,Only DIP-8 and SOL-16 are listed. A good answer says SOT-23 isn't offered according to this datasheet.
+o26,What is the input offset voltage of the MIC916 on ±12 V supplies?,no,,,,opamp,unanswerable,Operating range is ±2.5 V to ±9 V. Only ±5 V and ±9 V characteristics exist.
+o27,What is the gain bandwidth product of the OPA2134?,no,,,,opamp,unanswerable,The OPA2134 isn't in the corpus at all.
+o28,What is the slew rate of the PA51M at a case temperature of 150 °C?,no,,,,opamp,unanswerable,"Tests only cover -55, 25 and 125 °C."
+c01,"How many contacts does the CA3102R20-15P have, and what size are they?",yes,"7 contacts, size 12",connector-ittcannonllc_ca3102r20_15p,1,connector,lookup,
+c02,What is the contact current rating of the CA3102R20-15P?,yes,41 A at +20 °C (size 12 contacts),connector-ittcannonllc_ca3102r20_15p,1,connector,lookup,"Written as 'Size 25/12', which is easy to misread."
+c03,What coupling torque does the CA3102R20-15P specify?,yes,"Closing 9 Nm max, opening 0.7 Nm min",connector-ittcannonllc_ca3102r20_15p,1,connector,lookup,"Uses comma decimals (0,7 Nm)."
+c04,What is the shell material and plating of the CA3102R20-15P?,yes,"Aluminium alloy shell, olive drab chromate over cadmium plating",connector-ittcannonllc_ca3102r20_15p,1,connector,lookup,
+c05,What IP rating and how many mating cycles does the CA3102R20-15P have?,yes,"IP67 (DIN 40 050), 500 mating cycles min",connector-ittcannonllc_ca3102r20_15p,1,connector,lookup,
+c06,What is the rated current of the LEMO SKP.M13.GLLG?,yes,4.0 A,connector-lemo_skpm13gllg,1,connector,lookup,"LEMO pages are scraped web layouts, so labels and values are far apart in the text."
+c07,What is the matching part for the LEMO SKP.M13.GLLG?,yes,SAP.M13.GLA.6G,connector-lemo_skpm13gllg,1,connector,lookup,
+c08,"How many positions does the Phoenix Contact 1602608 device connector have, and what thread size?",yes,"16+3 positions, M23",connector-phoenixcontact_1602608,1,connector,lookup,"The page notes the figure shows the 12-position version, which is a distractor."
+c09,What panel thickness does the Phoenix Contact 1602608 support?,yes,0.8 mm to 6.5 mm,connector-phoenixcontact_1602608,1,connector,lookup,
+c10,How do the current ratings of the 3-pole and 5-pole Molex Mini-Change attachable connectors compare?,yes,"3P: 13 A, 5P: 8 A (both 600 V AC/DC)",connector-molexllc_1300170026,1;2,connector,comparison,A catalogue page covering several part numbers.
+c11,What IP rating and operating temperature range do the Molex Mini-Change connectors have?,yes,"IP68, -40 °C to 80 °C (-40 °F to 176 °F)",connector-molexllc_1300170026,2,connector,lookup,
+c12,What wire gauge range do the Molex Mini-Change attachable connectors accept?,yes,#24 AWG (0.25 mm²) to #15 AWG (2.0 mm²),connector-molexllc_1300170026,1;2,connector,lookup,
+c13,How many pins does the CUI SD-50 have and what is the pin layout?,yes,5 pins arranged over 180 degrees,connector-cuiinc_sd_50,1,connector,lookup,The SD-51 is also 5 pins but 240 degrees. Classic near-duplicate.
+c14,What are the contact resistance and rated life of the CUI SD series DIN connectors?,yes,"30 mΩ max contact resistance, 5,000 cycles",connector-cuiinc_sd_50,1,connector,lookup,
+c15,What are the rated voltage and current of the CUI SD series connectors?,yes,"100 V AC at 1 A, or 12 V DC at 2 A",connector-cuiinc_sd_50,1,connector,lookup,AC and DC ratings are paired. Don't mix them up.
+c16,Which CUI SD model has solid solder pins instead of solder cups?,yes,The SD-130. All other models have solder cups,connector-cuiinc_sd_50,4,connector,lookup,A note at the bottom of the assembly page.
+c17,"What is the current rating of the Hirose HR30 for 3 positions versus 6, 10 or 12 positions?",yes,"5 A for 3 positions, 2 A for 6, 10 and 12 positions",connector-hiroseelectriccoltd_hr30_6jb_6s,2,connector,comparison,The document is the HR30 overmold series catalogue. The part in the corpus is the 6-position version.
+c18,Under what conditions does the Hirose HR30 meet IP67?,yes,"When mated with its connector or protective cap: dust-tight, and no water entry submerged 1 m deep for 30 minutes",connector-hiroseelectriccoltd_hr30_6jb_6s,1;2,connector,lookup,
+c19,What is the rated current and maximum number of matings of the LEMO EGG.2K.306.CLLH?,yes,"12 A, 5000 matings",connector-lemo_egg2k306cllh,1,connector,lookup,
+c20,What temperature range and IP rating does the LEMO EGG.2K.306.CLLH have?,yes,"-55 °C to +200 °C, IP68",connector-lemo_egg2k306cllh,2,connector,lookup,
+c21,What is the largest conductor the LEMO EGG.2K.306.CLLH contacts accept?,yes,"0.5 mm² (AWG 20), solid or stranded",connector-lemo_egg2k306cllh,2,connector,lookup,
+c22,What are the rated current and rated voltage of the Phoenix Contact SACC-CI-M12MSL-4FE-L180 (1420817)?,yes,"16 A at 40 °C, 63 V",connector-phoenixcontact_1420817,2,connector,lookup,
+c23,What coding and how many positions does the Phoenix Contact 1420817 M12 connector have?,yes,"L-coded (power), 5 positions",connector-phoenixcontact_1420817,1;2,connector,lookup,"The name says 4FE (4 + functional earth), which adds up to 5 positions."
+c24,How must the Phoenix Contact 1420817 be protected when it is unplugged?,yes,Sealed with a protective cap rated above IP54. IP67 only applies when plugged in and locked,connector-phoenixcontact_1420817,1,connector,lookup,"Answer is in a general note, not the ratings list."
+c25,What is the contact current rating of the CA3102R20-15P at +85 °C?,no,,,,connector,unanswerable,Only the +20 °C rating (41 A) is given. Should not quote 41 A as if it applied.
+c26,What is the operating temperature range of the LEMO SKP.M13.GLLG?,no,,,,connector,unanswerable,"Its two pages have no temperature data. The LEMO EGG sheet does, which is a trap."
+c27,What is the current rating of an 8-pole Molex Mini-Change attachable connector?,no,,,,connector,unanswerable,Only 3P and 5P versions are covered.
+c28,What is the voltage rating of an 8-position Hirose HR30 connector?,no,,,,connector,unanswerable,"Ratings are only given for 3, 6, 10 and 12 positions."
+c29,How many mating cycles is the Amphenol RT0W7106SNH-K rated for?,no,,,,connector,unanswerable,This drawing was taken out of the corpus (see the README). It also tests a part that used to be indexed.
