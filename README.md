@@ -14,10 +14,11 @@ I picked datasheets because I can read them. If I can't tell whether an answer
 about a MOSFET's gate threshold voltage is right, I can't write a test set for
 it, and without a test set none of the numbers mean anything.
 
-**Status:** week 2. Corpus indexed (90 datasheets, 2,961 chunks), retrieval
-scoring works, and an 85-question golden set is drafted and being checked.
-Next: dense baseline numbers, then BM25 and a reranker. No answer generation
-yet.
+**Status:** week 2. Corpus indexed (90 datasheets, 2,961 chunks), 85-question
+golden set done, and retrieval is measured: hybrid search finds the right
+page in the top 5 for 67 of 70 answerable questions. Next: answer generation
+with citations, and scoring answers (faithfulness, refusals on the 15
+unanswerable questions).
 
 ---
 
@@ -39,12 +40,49 @@ All rows scored on the same golden set.
 |-------|---|---|---|---|---|---|---|
 | API model, no retrieval | | | | | | | |
 | API model, dense retrieval only | | | | | | | |
+| API model, hybrid | | | | | | | |
 | API model, hybrid + reranker | | | | | | | |
-| Local 3B Q4_K_M, hybrid + reranker | | | | | | | |
-| Local 3B fp16, hybrid + reranker | | | | | | | |
-| Local 3B Q4_K_M, hybrid + reranker + query rewriting | | | | | | | |
+| Local 3B Q4_K_M, hybrid | | | | | | | |
+| Local 3B fp16, hybrid | | | | | | | |
+| Local 3B Q4_K_M, hybrid + query rewriting | | | | | | | |
 
-Empty on purpose. Numbers go in when they've been measured.
+Empty on purpose. Numbers go in when they've been measured. Retrieval on its
+own has been measured, see below.
+
+### Retrieval results so far
+
+70 answerable golden-set questions, retrieval only (no answer generation).
+Latency is per query on the laptop CPU, after the models are loaded.
+
+| Setup | Hit@1 | Hit@5 | MRR | p50 | p95 |
+|-------|-------|-------|-----|-----|-----|
+| Dense, chunk text only | 0.371 | 0.686 | 0.503 | 29 ms | 34 ms |
+| BM25, chunk text only | 0.500 | 0.743 | 0.605 | 7 ms | 9 ms |
+| BM25 + document name | 0.586 | 0.857 | 0.700 | 6 ms | 8 ms |
+| Dense + document name | 0.557 | 0.914 | 0.713 | 59 ms | 65 ms |
+| **Hybrid (dense + BM25, RRF)** | 0.600 | **0.957** | 0.748 | 47 ms | 88 ms |
+| Hybrid + MiniLM reranker | 0.714 | 0.914 | 0.804 | 1,839 ms | 3,105 ms |
+
+What the paired comparisons say (bootstrap 95% CIs, McNemar on hit@5):
+
+- **The biggest win was the least glamorous one.** Putting the datasheet's
+  name in front of every chunk before embedding took dense from 0.686 to 0.914
+  hit@5 (17 questions fixed, 1 broken, p < 0.001). Spec tables almost never
+  name their own part. The part number is in the page title, which ends up
+  in a different chunk.
+- **Hybrid beats BM25 alone** (+0.100 hit@5, p = 0.039). Against dense with
+  document names, its +0.043 is within noise (CI includes zero).
+- **The reranker isn't worth it here.** On top of hybrid it improves MRR by
+  0.055 and hit@1 a little, but hit@5 drops by 0.043, and neither change is
+  significant (p = 0.45). It also takes p50 latency from 47 ms to 1.8 s. So
+  hybrid without reranking is the default, and the reranker stays available
+  as an option.
+- Before the document name was added, BM25 alone (0.857) beat the hybrid
+  (0.757). Checking why led to the fix above: BM25 had the part number and
+  dense didn't, so it wasn't a fair fight.
+
+Run files for every row are in `eval/results/`, so any of these can be
+re-checked with `eval_retrieval.py compare`.
 
 ### Hardware
 
@@ -103,10 +141,12 @@ rag/
   ingest/parse.py          PDF -> structured document (Docling), cached as JSON
   ingest/chunk.py          section-aware chunking, tables kept whole
   retrieval/dense.py       bge-small embeddings + local Qdrant
+  retrieval/bm25.py        keyword search, tokenised to match part numbers
+  retrieval/hybrid.py      rank fusion of dense + BM25, optional reranker
   eval/metrics.py          hit@k, MRR, nDCG, bootstrap CIs, McNemar
 eval/
   golden_template.csv      format + three worked examples
-  golden.csv               the real question set (drafted, being checked)
+  golden.csv               the question set: 70 answerable, 15 unanswerable
   results/                 per-question results of each scored run
 scripts/
   eval_retrieval.py        score retrieval against the golden set, compare runs
@@ -133,8 +173,8 @@ Hand-written questions live in `eval/golden.csv`, one row per question.
 | `notes` | What makes the question tricky. Useful when sorting failures. |
 
 ```bash
-python scripts/eval_retrieval.py run dense              # score, save eval/results/dense.json
-python scripts/eval_retrieval.py compare dense hybrid   # paired deltas + McNemar
+python scripts/eval_retrieval.py run hybrid --method hybrid   # dense | bm25 | hybrid | rerank
+python scripts/eval_retrieval.py compare dense hybrid         # paired deltas + McNemar
 ```
 
 Matching on (document, page) rather than chunk IDs means the golden set
@@ -171,8 +211,10 @@ number is the minimum, which is the maximum, or what the unit is. Instead:
   row is repeated in every piece.
 - Page headers and footers are dropped. They repeat on every page and add
   nothing.
-- What gets embedded is `section | caption` followed by the chunk text, so a
-  table full of numbers still carries a hint of what it's about.
+- What gets embedded is `document | section | caption` followed by the
+  chunk text. A table full of numbers usually doesn't name its own part,
+  and without the document name dense search can't tell one transistor's
+  ratings table from another's.
 
 ## Things I've noticed so far
 
@@ -195,6 +237,9 @@ exists.
   indexed, it dropped to rank 4: every transistor has a near-identical
   absolute maximum ratings table, and the embedding model doesn't weight the
   exact string "BC337". This is the main reason to add BM25 keyword search.
+  *Later:* the real cause was that the ratings table chunk never contains
+  "BC337" at all. Adding the document name to each chunk fixed most of it
+  (see "Retrieval results so far").
 - **Drawings aren't datasheets.** Three of the sampled connectors produced no
   chunks at all. Two Amphenol files are mechanical drawings: Docling read
   each page as one big picture, and the only real text was the title block
@@ -238,6 +283,31 @@ says why.
 
 ### Week 2
 
+- Added BM25 (`rank-bm25`), reciprocal rank fusion and a cross-encoder
+  reranker (`ms-marco-MiniLM-L-6-v2`), and scored all of them. Full table in
+  "Retrieval results so far".
+- **Plan change: every chunk now carries its document name.** It started as
+  a fairness check: BM25 had the document ID in its searchable text and
+  dense didn't. Giving dense the same information was the largest
+  improvement of anything tried so far (+0.229 hit@5), so it's now part of
+  every chunk's embedded text, not just an experiment.
+- **Plan change: no reranker by default.** The original plan assumed hybrid +
+  reranker as the production setup. Measured on this corpus, the reranker
+  doesn't significantly change hit@5 or MRR and costs about 40x the latency.
+  It also makes a new kind of mistake: it dropped the BC141-16 package
+  question entirely in favour of op-amp chunks. That's probably because a
+  web-search-trained model reads datasheet tables poorly. A bigger reranker
+  (e.g. bge-reranker-base) might change this, and it's on the list to try. The
+  ablation table now has hybrid as the base and the reranker as its own row.
+- Remaining hybrid misses (3 of 70):
+  - **Sanken 2SC4886:** the one-page layout separates symbols from values, so
+    "IC" and "14 A" never end up in the same piece of text. A parsing
+    problem.
+  - **OP07D supply current and GBW:** the ±5 V and ±15 V spec tables are
+    nearly identical. Retrieval finds the datasheet but picks the wrong
+    supply condition.
+- Golden set checked and committed. Dense baseline recorded before any of
+  the changes above (hit@5 0.686, MRR 0.503).
 - Drafted the golden set: 85 questions, 70 answerable and 15 unanswerable,
   roughly a third per component class (59 lookups, 7 comparisons, 4 multi-hop,
   15 unanswerable). Answers and page numbers come from the PDFs' own text,

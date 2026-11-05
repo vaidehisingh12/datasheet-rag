@@ -1,0 +1,1262 @@
+[
+  {
+    "id": "t01",
+    "question": "What is the maximum collector-emitter voltage (VCEO) of the BC337?",
+    "rank": 9,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.1111111111111111,
+    "ndcg@5": 0.0,
+    "ms": 47.8,
+    "top5": [
+      "transistor-Infineon_BC817KSERIES_BC818KSERIES_DS_v01_01_en p.[2]",
+      "transistor-ONSMS04099_1 p.[1]",
+      "transistor-WEILS00082_1 p.[1]",
+      "transistor-DiodesIncorporated_ZTX776 p.[1]",
+      "transistor-STMicroelectronics_BC14116 p.[1]"
+    ]
+  },
+  {
+    "id": "t02",
+    "question": "What is the minimum DC current gain of a BC337-25 at VCE = 1 V and IC = 100 mA?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 36.8,
+    "top5": [
+      "transistor-Infineon_BC817KSERIES_BC818KSERIES_DS_v01_01_en p.[5]",
+      "transistor-Infineon_BC817KSERIES_BC818KSERIES_DS_v01_01_en p.[5]",
+      "transistor-MicroCommercialCo_2N3904AP p.[1]",
+      "transistor-Infineon_BC817KSERIES_BC818KSERIES_DS_v01_01_en p.[5]",
+      "transistor-WEILS00082_1 p.[2]"
+    ]
+  },
+  {
+    "id": "t03",
+    "question": "What is the maximum power dissipation of the BC337 at an ambient temperature of 50 \u00b0C?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 31.0,
+    "top5": [
+      "transistor-ONSMS04099_1 p.[1]",
+      "opamp-ths3215 p.[62]",
+      "opamp-tlv2474 p.[18]",
+      "opamp-ada4855_3 p.[6]",
+      "opamp-1360fa p.[11]"
+    ]
+  },
+  {
+    "id": "t04",
+    "question": "How does the VCES rating of the BC337 compare with the BC338?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6309297535714575,
+    "ms": 31.2,
+    "top5": [
+      "transistor-BC337 p.[2]",
+      "transistor-BC337 p.[1]",
+      "transistor-ONSMS04099_1 p.[1]",
+      "transistor-Infineon_BC817KSERIES_BC818KSERIES_DS_v01_01_en p.[2]",
+      "transistor-DiodesIncorporated_FZT758TC p.[1]"
+    ]
+  },
+  {
+    "id": "t05",
+    "question": "What package is the CMLT3820G in and what is its marking code?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 26.1,
+    "top5": [
+      "transistor-CentralSemiconductorCorp_CMLT3820GTR p.[1]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1]",
+      "transistor-CentralSemiconductorCorp_CMPT5401ETR p.[1]",
+      "transistor-CentralSemiconductorCorp_CMPT5401ETR p.[1]"
+    ]
+  },
+  {
+    "id": "t06",
+    "question": "What is the maximum VCE(sat) of the CMLT3820G at IC = 1.0 A and IB = 100 mA?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 0.9469024295259745,
+    "ms": 31.5,
+    "top5": [
+      "transistor-CentralSemiconductorCorp_CMLT3820GTR p.[1]",
+      "transistor-CentralSemiconductorCorp_CMLT3820GTR p.[1, 2]",
+      "transistor-ONSemiconductor_BUL45D2 p.[3]",
+      "transistor-STMicroelectronics_BC14116 p.[1]",
+      "transistor-CentralSemiconductorCorp_CMLT3820GTR p.[1]"
+    ]
+  },
+  {
+    "id": "t07",
+    "question": "What is the complementary PNP device for the CMLT3820G?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 27.7,
+    "top5": [
+      "transistor-CentralSemiconductorCorp_CMLT3820GTR p.[1]",
+      "transistor-CentralSemiconductorCorp_CMLT3820GTR p.[1]",
+      "transistor-CentralSemiconductorCorp_CMPT5401ETR p.[1]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1]",
+      "transistor-CentralSemiconductorCorp_CMPT5401ETR p.[2]"
+    ]
+  },
+  {
+    "id": "t08",
+    "question": "What are the collector-base voltage ratings of the CMST3904 and the CMST3906?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 0.9047172294870751,
+    "ms": 31.4,
+    "top5": [
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1]",
+      "transistor-ONSemiconductor_BUL45D2 p.[1]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1, 2]"
+    ]
+  },
+  {
+    "id": "t09",
+    "question": "What is the maximum storage time (ts) of the CMST3906?",
+    "rank": 3,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.3333333333333333,
+    "ndcg@5": 0.5437713091520254,
+    "ms": 26.5,
+    "top5": [
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1]",
+      "transistor-ONSMS04099_1 p.[27]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[2]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[2]"
+    ]
+  },
+  {
+    "id": "t10",
+    "question": "Which pin of the CMST3904 in the SOT-323 package is the base?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6309297535714575,
+    "ms": 30.2,
+    "top5": [
+      "opamp-opa4348_q1 p.[3]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1, 2]",
+      "opamp-opa4348_q1 p.[3]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1]",
+      "transistor-CentralSemiconductorCorp_CMST3904BK p.[1]"
+    ]
+  },
+  {
+    "id": "t11",
+    "question": "What is the maximum continuous collector current of the 2SC4886?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 29.5,
+    "top5": [
+      "transistor-ONSemiconductor_BUL45D2 p.[1]",
+      "transistor-DiodesIncorporated_ZTX696BSTZ p.[1]",
+      "transistor-DiodesIncorporated_ZTX776 p.[1]",
+      "transistor-DiodesIncorporated_ZTX789ASTZ p.[1]",
+      "transistor-CentralSemiconductorCorp_CMLT3820GTR p.[1]"
+    ]
+  },
+  {
+    "id": "t12",
+    "question": "What hFE range does rank Y of the 2SC4886 cover?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 23.3,
+    "top5": [
+      "transistor-FairchildSemiconductor_KSC2310YTA p.[1]",
+      "transistor-BC337 p.[2]",
+      "transistor-ONSemiconductor_BUL45D2 p.[1]",
+      "transistor-DiodesIncorporated_ZXTP26020DMFTA p.[1]",
+      "transistor-BC337 p.[3, 4]"
+    ]
+  },
+  {
+    "id": "t13",
+    "question": "What is the complementary type of the 2SC4886 and what package is it in?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 29.7,
+    "top5": [
+      "opamp-ths4081 p.[2]",
+      "opamp-tlv2474 p.[26]",
+      "opamp-tlv2474 p.[26]",
+      "opamp-tlv2474 p.[33]",
+      "opamp-ina211 p.[24]"
+    ]
+  },
+  {
+    "id": "t14",
+    "question": "What package is the BC141-16 in and what is its maximum operating junction temperature?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6309297535714575,
+    "ms": 34.3,
+    "top5": [
+      "opamp-ths4081 p.[3]",
+      "transistor-STMicroelectronics_BC14116 p.[1]",
+      "opamp-mic916 p.[3]",
+      "opamp-opa129 p.[3]",
+      "opamp-ths4211 p.[29]"
+    ]
+  },
+  {
+    "id": "t15",
+    "question": "What is the junction-to-case thermal resistance of the BC141-16?",
+    "rank": 4,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 1.0,
+    "rr": 0.25,
+    "ndcg@5": 0.43067655807339306,
+    "ms": 26.9,
+    "top5": [
+      "transistor-STMicroelectronics_BC14116 p.[1]",
+      "transistor-SGSTS13702_1 p.[2]",
+      "transistor-STMicroelectronics_MJD2955T4 p.[2]",
+      "transistor-STMicroelectronics_BC14116 p.[2]",
+      "opamp-ths3215 p.[4]"
+    ]
+  },
+  {
+    "id": "t16",
+    "question": "What is the turn-off time of the BC141-16 at IC = 100 mA?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 30.8,
+    "top5": [
+      "transistor-STMicroelectronics_BC14116 p.[1]",
+      "opamp-ths4271_ep p.[19]",
+      "opamp-ths4211 p.[18]",
+      "transistor-MicroCommercialCo_2N3904AP p.[4]",
+      "transistor-Infineon_BC817KSERIES_BC818KSERIES_DS_v01_01_en p.[6, 7]"
+    ]
+  },
+  {
+    "id": "t17",
+    "question": "Is the MJD2955 NPN or PNP, and what does the T4 suffix mean?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 31.3,
+    "top5": [
+      "transistor-STMicroelectronics_MJD2955T4 p.[1]",
+      "transistor-STMicroelectronics_MJD2955T4 p.[1]",
+      "transistor-STMicroelectronics_MJD2955T4 p.[4]",
+      "transistor-STMicroelectronics_MJD2955T4 p.[3]",
+      "transistor-PHGLS20267_1 p.[2]"
+    ]
+  },
+  {
+    "id": "t18",
+    "question": "What is the DC current gain range of the MJD2955 at IC = 4 A and VCE = 4 V?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 35.0,
+    "top5": [
+      "transistor-Infineon_BC817KSERIES_BC818KSERIES_DS_v01_01_en p.[5]",
+      "transistor-Infineon_BC817KSERIES_BC818KSERIES_DS_v01_01_en p.[5]",
+      "transistor-Infineon_BC817KSERIES_BC818KSERIES_DS_v01_01_en p.[5]",
+      "transistor-MicroCommercialCo_2N3904AP p.[1]",
+      "opamp-ths4081 p.[5]"
+    ]
+  },
+  {
+    "id": "t19",
+    "question": "What is the junction-to-case thermal resistance of the MJD2955?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 29.0,
+    "top5": [
+      "transistor-STMicroelectronics_MJD2955T4 p.[2]",
+      "transistor-STMicroelectronics_BC14116 p.[2]",
+      "transistor-SGSTS13702_1 p.[2]",
+      "transistor-STMicroelectronics_MJD2955T4 p.[1]",
+      "opamp-ths3215 p.[4]"
+    ]
+  },
+  {
+    "id": "t20",
+    "question": "What peak avalanche current can the ZTX415 handle, and at what pulse width?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 26.3,
+    "top5": [
+      "transistor-DiodesIncorporated_ZTX415STZ p.[1]",
+      "transistor-DiodesIncorporated_ZTX603STZ p.[1]",
+      "transistor-DiodesIncorporated_FZT758TC p.[1]",
+      "transistor-ONSemiconductor_BUL45D2 p.[1]",
+      "opamp-ths3215 p.[58]"
+    ]
+  },
+  {
+    "id": "t21",
+    "question": "What applications is the ZTX415 avalanche transistor intended for?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 23.5,
+    "top5": [
+      "transistor-DiodesIncorporated_ZTX415STZ p.[1]",
+      "transistor-PHGLS20267_1 p.[2]",
+      "transistor-PHGLS20267_1 p.[5]",
+      "transistor-PHGLS20267_1 p.[3]",
+      "transistor-PHGLS20267_1 p.[4]"
+    ]
+  },
+  {
+    "id": "t22",
+    "question": "What hFE range does the Y classification of the KSC2310 cover?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 30.5,
+    "top5": [
+      "transistor-FairchildSemiconductor_KSC2310YTA p.[1]",
+      "transistor-BC337 p.[2]",
+      "transistor-BC337 p.[3, 4]",
+      "transistor-DiodesIncorporated_ZXTP26020DMFTA p.[1]",
+      "transistor-FairchildSemiconductor_KSC2310YTA p.[2, 3]"
+    ]
+  },
+  {
+    "id": "t23",
+    "question": "What is the pin order of the KSC2310 in the TO-92L package?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 28.4,
+    "top5": [
+      "opamp-opa4348_q1 p.[3]",
+      "opamp-opa4348_q1 p.[3]",
+      "opamp-lmc6442_april162015 p.[15]",
+      "opamp-op07d p.[1]",
+      "opamp-amc1200_q1 p.[3]"
+    ]
+  },
+  {
+    "id": "o01",
+    "question": "What is the maximum input offset voltage of the OP07D at 25 \u00b0C?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6309297535714575,
+    "ms": 29.3,
+    "top5": [
+      "opamp-op07d p.[5]",
+      "opamp-op07d p.[1]",
+      "opamp-op07d p.[5]",
+      "opamp-op07d p.[2]",
+      "opamp-opa129 p.[2]"
+    ]
+  },
+  {
+    "id": "o02",
+    "question": "What is the supply current per amplifier of the OP07D at \u00b15 V?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 28.3,
+    "top5": [
+      "opamp-op07d p.[1]",
+      "opamp-op07d p.[5]",
+      "opamp-opa2355 p.[10]",
+      "opamp-op07d p.[5]",
+      "opamp-tlv2474 p.[1]"
+    ]
+  },
+  {
+    "id": "o03",
+    "question": "What is the gain bandwidth product of the OP07D at \u00b15 V supplies?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 28.0,
+    "top5": [
+      "opamp-op07d p.[1]",
+      "opamp-op07d p.[5]",
+      "opamp-op07d p.[5]",
+      "opamp-ths4081 p.[1]",
+      "opamp-ths3001 p.[1]"
+    ]
+  },
+  {
+    "id": "o04",
+    "question": "What is the voltage noise density of the OP07D at 1 kHz with \u00b15 V supplies?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 29.4,
+    "top5": [
+      "opamp-op07d p.[5]",
+      "opamp-op07d p.[1]",
+      "opamp-opa2355 p.[10]",
+      "opamp-op07d p.[5]",
+      "opamp-op07d p.[2]"
+    ]
+  },
+  {
+    "id": "o05",
+    "question": "Which pins are the output and the offset null pins on the 8-lead OP07D?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 29.1,
+    "top5": [
+      "opamp-op07d p.[1]",
+      "opamp-op07d p.[5]",
+      "opamp-ada4077_2_ep p.[1]",
+      "opamp-op07d p.[5]",
+      "opamp-op07d p.[2]"
+    ]
+  },
+  {
+    "id": "o06",
+    "question": "What gain resistor RG gives the INA114 a gain of 100?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6509209298071326,
+    "ms": 26.0,
+    "top5": [
+      "opamp-ina114 p.[8]",
+      "opamp-ina114 p.[1]",
+      "opamp-ths4271_ep p.[22]",
+      "opamp-ina114 p.[2]",
+      "opamp-ina211 p.[17, 18]"
+    ]
+  },
+  {
+    "id": "o07",
+    "question": "What is the minimum common-mode rejection of the INA114BP at G = 1000?",
+    "rank": 5,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 1.0,
+    "rr": 0.2,
+    "ndcg@5": 0.38685280723454163,
+    "ms": 31.0,
+    "top5": [
+      "opamp-ina114 p.[9]",
+      "opamp-ths3001 p.[7]",
+      "opamp-ina240 p.[10]",
+      "opamp-ina211 p.[1]",
+      "opamp-ina114 p.[2]"
+    ]
+  },
+  {
+    "id": "o08",
+    "question": "What is the -3 dB bandwidth of the INA114 at a gain of 100?",
+    "rank": 5,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 1.0,
+    "rr": 0.2,
+    "ndcg@5": 0.38685280723454163,
+    "ms": 27.9,
+    "top5": [
+      "opamp-ina114 p.[1]",
+      "opamp-ina114 p.[8]",
+      "opamp-ina114 p.[9]",
+      "opamp-ths4211 p.[1]",
+      "opamp-ina114 p.[2]"
+    ]
+  },
+  {
+    "id": "o09",
+    "question": "How does the maximum initial offset voltage of the INA114BP compare with the INA114AP?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 0.9469024295259745,
+    "ms": 30.4,
+    "top5": [
+      "opamp-ina114 p.[2]",
+      "opamp-ina114 p.[2]",
+      "opamp-ina114 p.[1]",
+      "opamp-ina114 p.[9]",
+      "opamp-ina114 p.[2]"
+    ]
+  },
+  {
+    "id": "o10",
+    "question": "What packages is the INA114 available in?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 28.8,
+    "top5": [
+      "opamp-ina114 p.[1]",
+      "opamp-ina114 p.[1]",
+      "opamp-ina211 p.[10]",
+      "opamp-ina211 p.[4]",
+      "opamp-ina211 p.[12]"
+    ]
+  },
+  {
+    "id": "o11",
+    "question": "What is the current limit range of the PA51M at 25 \u00b0C?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 27.0,
+    "top5": [
+      "opamp-pa51mu p.[2]",
+      "opamp-pa51mu p.[2]",
+      "opamp-pa61mu p.[2]",
+      "opamp-ada4077_2_ep p.[5]",
+      "transistor-DiodesIncorporated_ZTX789ASTZ p.[1]"
+    ]
+  },
+  {
+    "id": "o12",
+    "question": "How does the maximum quiescent current of the PA51M at 125 \u00b0C compare with 25 \u00b0C?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 31.0,
+    "top5": [
+      "opamp-pa51mu p.[2]",
+      "opamp-pa51mu p.[2]",
+      "transistor-STMicroelectronics_BUV48A p.[3]",
+      "transistor-MicroCommercialCo_MPSA92AP p.[1]",
+      "opamp-ths4271_ep p.[8]"
+    ]
+  },
+  {
+    "id": "o13",
+    "question": "What is the maximum input bias current of the OPA129PB compared with the OPA129P?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6934264036172708,
+    "ms": 30.6,
+    "top5": [
+      "opamp-opa129 p.[1]",
+      "opamp-opa129 p.[2]",
+      "opamp-opa129 p.[2]",
+      "opamp-opa129 p.[7]",
+      "opamp-opa129 p.[6]"
+    ]
+  },
+  {
+    "id": "o14",
+    "question": "Why do pins 1 and 4 of the OPA129 have no internal connection?",
+    "rank": 5,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 1.0,
+    "rr": 0.2,
+    "ndcg@5": 0.38685280723454163,
+    "ms": 28.9,
+    "top5": [
+      "opamp-tlc082_q1 p.[3]",
+      "opamp-opa129 p.[6]",
+      "opamp-opa129 p.[6]",
+      "opamp-opa129 p.[7]",
+      "opamp-opa129 p.[1]"
+    ]
+  },
+  {
+    "id": "o15",
+    "question": "What is the junction-to-ambient thermal resistance of the OPA129 in the SO-8 package?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 31.5,
+    "top5": [
+      "opamp-opa4348_q1 p.[6]",
+      "opamp-opa129 p.[1]",
+      "opamp-opa4348_q1 p.[6]",
+      "opamp-amc1200_q1 p.[4]",
+      "opamp-op07d p.[6]"
+    ]
+  },
+  {
+    "id": "o16",
+    "question": "What is the input voltage noise of the OPA129 at 1 kHz?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6309297535714575,
+    "ms": 27.0,
+    "top5": [
+      "opamp-opa129 p.[1]",
+      "opamp-opa129 p.[2]",
+      "opamp-lmp8271 p.[5]",
+      "opamp-lm6211 p.[11]",
+      "opamp-lm6211 p.[11]"
+    ]
+  },
+  {
+    "id": "o17",
+    "question": "What is the gain bandwidth product and supply current per op amp of the MIC916?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 0.8529278650606567,
+    "ms": 29.8,
+    "top5": [
+      "opamp-mic916 p.[1]",
+      "opamp-mic916 p.[11]",
+      "opamp-mic916 p.[11]",
+      "opamp-mic916 p.[1]",
+      "opamp-mic916 p.[1]"
+    ]
+  },
+  {
+    "id": "o18",
+    "question": "How many amplifiers does the MIC916 contain and what package is it in?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.7122630665145961,
+    "ms": 26.6,
+    "top5": [
+      "opamp-mic916 p.[11]",
+      "opamp-mic916 p.[1]",
+      "opamp-mic916 p.[1]",
+      "opamp-mic916 p.[11]",
+      "opamp-mic916 p.[1]"
+    ]
+  },
+  {
+    "id": "o19",
+    "question": "What must be done with the V- pins of the MIC916?",
+    "rank": 3,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.3333333333333333,
+    "ndcg@5": 0.5437713091520254,
+    "ms": 27.3,
+    "top5": [
+      "opamp-mic916 p.[11]",
+      "opamp-mic916 p.[11]",
+      "opamp-mic916 p.[1]",
+      "opamp-ths3215 p.[3]",
+      "opamp-mic916 p.[1]"
+    ]
+  },
+  {
+    "id": "o20",
+    "question": "What is the package thermal resistance of the MIC916?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 27.7,
+    "top5": [
+      "opamp-mic916 p.[11]",
+      "opamp-mic916 p.[11]",
+      "opamp-mic916 p.[1]",
+      "opamp-mic916 p.[11]",
+      "opamp-mic916 p.[1]"
+    ]
+  },
+  {
+    "id": "o21",
+    "question": "What is the fixed gain of the AD8209 and how is it split between its stages?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6309297535714575,
+    "ms": 29.2,
+    "top5": [
+      "opamp-ad8209 p.[12]",
+      "opamp-ad8209 p.[1]",
+      "opamp-lmp8271 p.[14]",
+      "opamp-ad605 p.[17]",
+      "opamp-ad605 p.[1]"
+    ]
+  },
+  {
+    "id": "o22",
+    "question": "What common-mode voltage range can the AD8209 operate over and survive?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 21.9,
+    "top5": [
+      "opamp-ad8209 p.[1]",
+      "opamp-ad8209 p.[12]",
+      "opamp-ad8209 p.[5]",
+      "opamp-en_cd00003594 p.[6]",
+      "opamp-opa4348_q1 p.[13, 14]"
+    ]
+  },
+  {
+    "id": "o23",
+    "question": "What is the operating temperature range of the AD8209 WH grade?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 22.7,
+    "top5": [
+      "opamp-amc1200_q1 p.[4]",
+      "opamp-ad8209 p.[4]",
+      "opamp-ina211 p.[6]",
+      "opamp-opa4348_q1 p.[5]",
+      "opamp-lm324_n p.[4]"
+    ]
+  },
+  {
+    "id": "c01",
+    "question": "How many contacts does the CA3102R20-15P have, and what size are they?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 30.1,
+    "top5": [
+      "connector-ittcannonllc_ca3102r20_15p p.[1]",
+      "connector-ittcannonllc_m_xl_4_31 p.[22]",
+      "connector-ittcannonllc_ca3102r20_19swf183 p.[1]",
+      "connector-ittcannonllc_ca06ew14s_7sb03 p.[1]",
+      "connector-ittcannonllc_ca3100ke14s_2p p.[5]"
+    ]
+  },
+  {
+    "id": "c02",
+    "question": "What is the contact current rating of the CA3102R20-15P?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 0.9197207891481876,
+    "ms": 27.6,
+    "top5": [
+      "connector-ittcannonllc_ca3102r20_15p p.[1]",
+      "connector-ittcannonllc_ca3102r20_19swf183 p.[1]",
+      "connector-ittcannonllc_ca3102r20_15p p.[1]",
+      "transistor-ONSMS04099_1 p.[1]",
+      "connector-ittcannonllc_ca06ew14s_7sb03 p.[1]"
+    ]
+  },
+  {
+    "id": "c03",
+    "question": "What coupling torque does the CA3102R20-15P specify?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 21.9,
+    "top5": [
+      "connector-ittcannonllc_ca3102r20_15p p.[1]",
+      "connector-ittcannonllc_ca3102r20_19swf183 p.[1]",
+      "connector-phoenixcontact_1694305 p.[1]",
+      "connector-phoenixcontact_1553213 p.[1]",
+      "opamp-ina240 p.[21]"
+    ]
+  },
+  {
+    "id": "c04",
+    "question": "What is the shell material and plating of the CA3102R20-15P?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 30.6,
+    "top5": [
+      "connector-ittcannonllc_ca3102r20_15p p.[1]",
+      "connector-ittcannonllc_ca3102r20_19swf183 p.[1]",
+      "connector-ittcannonllc_ca06ew14s_7sb03 p.[1]",
+      "connector-ittcannonllc_kpt7a20_39sew p.[1]",
+      "connector-ittcannonllc_kptc6f22_55sdmb p.[1]"
+    ]
+  },
+  {
+    "id": "c05",
+    "question": "What IP rating and how many mating cycles does the CA3102R20-15P have?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 28.5,
+    "top5": [
+      "connector-ittcannonllc_ca3102r20_15p p.[1]",
+      "connector-ittcannonllc_ca3102r20_15p p.[1]",
+      "connector-ittcannonllc_ca3100ke14s_2p p.[2]",
+      "connector-ittcannonllc_ca3102r20_19swf183 p.[1]",
+      "connector-lemo_fmn2m319xlct p.[1]"
+    ]
+  },
+  {
+    "id": "c06",
+    "question": "What is the rated current of the LEMO SKP.M13.GLLG?",
+    "rank": 5,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 1.0,
+    "rr": 0.2,
+    "ndcg@5": 0.38685280723454163,
+    "ms": 28.9,
+    "top5": [
+      "opamp-lmp8271 p.[1, 2]",
+      "transistor-DiodesIncorporated_ZTX603STZ p.[1]",
+      "connector-lemo_ffa4s302slac52 p.[1]",
+      "connector-lemo_fmn2m319xlct p.[1]",
+      "connector-lemo_skpm13gllg p.[1]"
+    ]
+  },
+  {
+    "id": "c07",
+    "question": "What is the matching part for the LEMO SKP.M13.GLLG?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6509209298071326,
+    "ms": 23.0,
+    "top5": [
+      "connector-conec_17_400453 p.[1]",
+      "connector-lemo_skpm13gllg p.[1]",
+      "connector-lemo_fmn2m319xlct p.[1, 2]",
+      "connector-lemo_skpm13gllg p.[1]",
+      "connector-lemo_fmn2m319xlct p.[1]"
+    ]
+  },
+  {
+    "id": "c08",
+    "question": "How many positions does the Phoenix Contact 1602608 device connector have, and what thread size?",
+    "rank": 3,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.3333333333333333,
+    "ndcg@5": 0.5,
+    "ms": 28.6,
+    "top5": [
+      "connector-phoenixcontact_1602383 p.[1]",
+      "connector-phoenixcontact_1597867 p.[1]",
+      "connector-phoenixcontact_1602608 p.[1]",
+      "connector-phoenixcontact_1624051 p.[1]",
+      "connector-phoenixcontact_1412237 p.[1]"
+    ]
+  },
+  {
+    "id": "c09",
+    "question": "What panel thickness does the Phoenix Contact 1602608 support?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 26.7,
+    "top5": [
+      "connector-phoenixcontact_1602608 p.[1]",
+      "connector-phoenixcontact_1624051 p.[1]",
+      "connector-phoenixcontact_1420817 p.[1]",
+      "connector-phoenixcontact_1694305 p.[4]",
+      "connector-phoenixcontact_1624051 p.[2]"
+    ]
+  },
+  {
+    "id": "c10",
+    "question": "How do the current ratings of the 3-pole and 5-pole Molex Mini-Change attachable connectors compare?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6309297535714575,
+    "ms": 32.0,
+    "top5": [
+      "connector-ittcannonllc_m_xl_4_31 p.[22]",
+      "connector-molexllc_1300170026 p.[1]",
+      "connector-phoenixcontact_1553213 p.[1]",
+      "connector-ittcannonllc_m_xl_4_31 p.[21]",
+      "connector-phoenixcontact_1694305 p.[1]"
+    ]
+  },
+  {
+    "id": "c11",
+    "question": "What IP rating and operating temperature range do the Molex Mini-Change connectors have?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 32.8,
+    "top5": [
+      "connector-phoenixcontact_1694305 p.[2]",
+      "opamp-lmp8271 p.[2]",
+      "connector-ittcannonllc_m_xl_4_31 p.[22]",
+      "connector-phoenixcontact_1553213 p.[1]",
+      "opamp-ad605 p.[6]"
+    ]
+  },
+  {
+    "id": "c12",
+    "question": "What wire gauge range do the Molex Mini-Change attachable connectors accept?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 31.0,
+    "top5": [
+      "connector-molexllc_1300170026 p.[1]",
+      "connector-molexllc_1300170026 p.[2]",
+      "connector-ittcannonllc_m_xl_4_31 p.[22]",
+      "connector-phoenixcontact_1553213 p.[4]",
+      "connector-ittcannonllc_ca3102r20_19swf183 p.[1]"
+    ]
+  },
+  {
+    "id": "c13",
+    "question": "How many pins does the CUI SD-50 have and what is the pin layout?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 30.3,
+    "top5": [
+      "opamp-opa4348_q1 p.[4]",
+      "opamp-ada4077_2_ep p.[6]",
+      "opamp-ad8209 p.[7]",
+      "transistor-CentralSemiconductorCorp_CMLT3820GTR p.[2]",
+      "opamp-ad605 p.[7]"
+    ]
+  },
+  {
+    "id": "c14",
+    "question": "What are the contact resistance and rated life of the CUI SD series DIN connectors?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 24.5,
+    "top5": [
+      "connector-cuiinc_sd_50 p.[1]",
+      "connector-ittcannonllc_ca3102r20_15p p.[1]",
+      "connector-ittcannonllc_ca3102r20_19swf183 p.[1]",
+      "connector-phoenixcontact_1597867 p.[2]",
+      "connector-ittcannonllc_m_xl_4_31 p.[16]"
+    ]
+  },
+  {
+    "id": "c15",
+    "question": "What are the rated voltage and current of the CUI SD series connectors?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 28.0,
+    "top5": [
+      "connector-cuiinc_sd_50 p.[1]",
+      "transistor-ONSMS04099_1 p.[1]",
+      "connector-phoenixcontact_1420817 p.[4]",
+      "transistor-MCCCS08818_1 p.[1]",
+      "transistor-ONSemiconductor_BUL45D2 p.[1]"
+    ]
+  },
+  {
+    "id": "c16",
+    "question": "Which CUI SD model has solid solder pins instead of solder cups?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 29.1,
+    "top5": [
+      "connector-cuiinc_sd_50 p.[4]",
+      "connector-cuiinc_sd_50 p.[1]",
+      "opamp-ina240 p.[33, 34]",
+      "transistor-NXPUSAInc_PBSS5360PASX p.[13]",
+      "opamp-lmp8271 p.[4, 5]"
+    ]
+  },
+  {
+    "id": "c17",
+    "question": "What is the current rating of the Hirose HR30 for 3 positions versus 6, 10 or 12 positions?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6309297535714575,
+    "ms": 31.9,
+    "top5": [
+      "connector-hiroseelectriccoltd_hr30_6jb_6s p.[1]",
+      "connector-hiroseelectriccoltd_hr30_6jb_6s p.[2]",
+      "opamp-lm324_n p.[4]",
+      "connector-hiroseelectriccoltd_hr30_6jb_6s p.[8]",
+      "connector-hiroseelectriccoltd_hr30_6jb_6s p.[8]"
+    ]
+  },
+  {
+    "id": "c18",
+    "question": "Under what conditions does the Hirose HR30 meet IP67?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 0.8772153153380493,
+    "ms": 22.8,
+    "top5": [
+      "connector-hiroseelectriccoltd_hr30_6jb_6s p.[1]",
+      "connector-hiroseelectriccoltd_hr30_6jb_6s p.[8]",
+      "connector-conec_17_400453 p.[1]",
+      "connector-hiroseelectriccoltd_hr30_6jb_6s p.[2]",
+      "connector-hiroseelectriccoltd_hr30_6jb_6s p.[8]"
+    ]
+  },
+  {
+    "id": "c19",
+    "question": "What is the rated current and maximum number of matings of the LEMO EGG.2K.306.CLLH?",
+    "rank": 2,
+    "hit@1": 0.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 0.5,
+    "ndcg@5": 0.6309297535714575,
+    "ms": 34.1,
+    "top5": [
+      "connector-lemo_fmn2m319xlct p.[1, 2]",
+      "connector-lemo_egg2k306cllh p.[1, 2]",
+      "connector-lemo_ffa4s302slac52 p.[1]",
+      "connector-conec_17_400453 p.[1]",
+      "transistor-Infineon_BC817KSERIES_BC818KSERIES_DS_v01_01_en p.[2]"
+    ]
+  },
+  {
+    "id": "c20",
+    "question": "What temperature range and IP rating does the LEMO EGG.2K.306.CLLH have?",
+    "rank": 4,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 1.0,
+    "rr": 0.25,
+    "ndcg@5": 0.43067655807339306,
+    "ms": 29.0,
+    "top5": [
+      "connector-lemo_fmn2m319xlct p.[1, 2]",
+      "connector-conec_17_400453 p.[1]",
+      "opamp-ths4081 p.[4]",
+      "connector-lemo_egg2k306cllh p.[1, 2]",
+      "connector-phoenixcontact_1553213 p.[1]"
+    ]
+  },
+  {
+    "id": "c21",
+    "question": "What is the largest conductor the LEMO EGG.2K.306.CLLH contacts accept?",
+    "rank": 1,
+    "hit@1": 1.0,
+    "hit@3": 1.0,
+    "hit@5": 1.0,
+    "rr": 1.0,
+    "ndcg@5": 1.0,
+    "ms": 30.9,
+    "top5": [
+      "connector-lemo_egg2k306cllh p.[1, 2]",
+      "connector-lemo_fmn2m319xlct p.[1, 2]",
+      "connector-lemo_ffa4s302slac52 p.[1]",
+      "connector-conec_17_400453 p.[1]",
+      "connector-ittcannonllc_kptc6f22_55sdmb p.[1]"
+    ]
+  },
+  {
+    "id": "c22",
+    "question": "What are the rated current and rated voltage of the Phoenix Contact SACC-CI-M12MSL-4FE-L180 (1420817)?",
+    "rank": null,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.0,
+    "ndcg@5": 0.0,
+    "ms": 31.9,
+    "top5": [
+      "connector-phoenixcontact_1420817 p.[1]",
+      "connector-phoenixcontact_1694305 p.[1]",
+      "connector-phoenixcontact_1424198 p.[1]",
+      "connector-phoenixcontact_1602383 p.[1]",
+      "connector-phoenixcontact_1553213 p.[1]"
+    ]
+  },
+  {
+    "id": "c23",
+    "question": "What coding and how many positions does the Phoenix Contact 1420817 M12 connector have?",
+    "rank": 7,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.14285714285714285,
+    "ndcg@5": 0.0,
+    "ms": 30.1,
+    "top5": [
+      "connector-phoenixcontact_1602383 p.[1]",
+      "connector-phoenixcontact_1597867 p.[1]",
+      "connector-phoenixcontact_1694305 p.[4]",
+      "connector-phoenixcontact_1602383 p.[3]",
+      "connector-phoenixcontact_1553213 p.[1]"
+    ]
+  },
+  {
+    "id": "c24",
+    "question": "How must the Phoenix Contact 1420817 be protected when it is unplugged?",
+    "rank": 6,
+    "hit@1": 0.0,
+    "hit@3": 0.0,
+    "hit@5": 0.0,
+    "rr": 0.16666666666666666,
+    "ndcg@5": 0.0,
+    "ms": 32.4,
+    "top5": [
+      "connector-phoenixcontact_1694305 p.[4]",
+      "connector-phoenixcontact_1602383 p.[3]",
+      "connector-phoenixcontact_1602383 p.[1]",
+      "connector-phoenixcontact_1597867 p.[3]",
+      "connector-phoenixcontact_1597867 p.[1]"
+    ]
+  }
+]

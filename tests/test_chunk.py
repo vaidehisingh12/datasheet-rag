@@ -130,6 +130,7 @@ def test_notes_inside_figures_are_kept_but_axis_labels_are_not():
 
 
 def test_embed_text_puts_context_first():
-    table = next(c for c in chunk_document(sample_doc(), "t", "transistor") if c.kind == "table")
+    table = next(c for c in chunk_document(sample_doc(), "transistor-ON_BC337", "transistor")
+                 if c.kind == "table")
     first_line = table.embed_text().splitlines()[0]
-    assert first_line == "Electrical Characteristics | Table 1. Maximum ratings"
+    assert first_line == "ON BC337 | Electrical Characteristics | Table 1. Maximum ratings"
