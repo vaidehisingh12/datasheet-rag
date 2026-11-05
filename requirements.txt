@@ -2,4 +2,5 @@ requests>=2.31
 docling>=2.0
 sentence-transformers>=3.0
 qdrant-client>=1.9
+rank-bm25>=0.2.2
 pytest>=8.0

@@ -1,8 +1,12 @@
 """
 Score retrieval against the golden set, or compare two scored runs.
 
-    python scripts/eval_retrieval.py run dense            # score current index, save as "dense"
-    python scripts/eval_retrieval.py compare dense hybrid # paired comparison of two saved runs
+    python scripts/eval_retrieval.py run dense                          # dense is the default method
+    python scripts/eval_retrieval.py run hybrid --method hybrid
+    python scripts/eval_retrieval.py compare dense hybrid               # paired comparison of two saved runs
+
+Methods: dense, bm25, hybrid (dense + BM25 fused), rerank (hybrid, then a
+cross-encoder over the top 30).
 
 Only answerable questions count towards hit rate / MRR / nDCG. Unanswerable
 ones have no right document to find, and including them would cap every
@@ -17,7 +21,9 @@ statistics need.
 import argparse
 import csv
 import json
+import statistics
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -51,14 +57,33 @@ def load_golden() -> list[dict]:
     return rows
 
 
-def run(name: str, use_class_filter: bool) -> None:
-    from rag.retrieval import dense  # slow import, only needed here
+def get_searcher(method: str):
+    # Imported here because loading the models is slow and `compare` doesn't need them.
+    from rag.retrieval import bm25, dense, hybrid
+    return {
+        "dense": dense.search,
+        "bm25": bm25.search,
+        "hybrid": hybrid.search,
+        "rerank": hybrid.search_reranked,
+    }[method]
 
+
+def run(name: str, method: str, use_class_filter: bool) -> None:
+    from rag.retrieval import dense
+
+    search = get_searcher(method)
     golden = [g for g in load_golden() if g["answerable"]]
+
+    # One throwaway query first, so model loading doesn't land in the first
+    # question's latency and skew p95.
+    search("warm up", k=DEPTH)
+
     per_question = []
     for g in golden:
         cls = g["component_class"] if use_class_filter else None
-        hits = dense.search(g["question"], k=DEPTH, component_class=cls)
+        start = time.perf_counter()
+        hits = search(g["question"], k=DEPTH, component_class=cls)
+        elapsed_ms = (time.perf_counter() - start) * 1000
         rank = first_relevant_rank(hits, g)
         per_question.append({
             "id": g["id"],
@@ -69,6 +94,7 @@ def run(name: str, use_class_filter: bool) -> None:
             "hit@5": hit_at_k(rank, 5),
             "rr": reciprocal_rank(rank),
             "ndcg@5": ndcg_at_k(hits, g, 5),
+            "ms": round(elapsed_ms, 1),
             "top5": [f"{h['doc_id']} p.{h['pages']}" for h in hits[:5]],
         })
     dense.close()
@@ -82,6 +108,10 @@ def run(name: str, use_class_filter: bool) -> None:
         mean, low, high = bootstrap_ci([q[metric] for q in per_question])
         label = "MRR" if metric == "rr" else metric
         print(f"  {label:7} {mean:.3f}   95% CI [{low:.3f}, {high:.3f}]")
+
+    times = sorted(q["ms"] for q in per_question)
+    p95 = times[min(len(times) - 1, int(0.95 * len(times)))]
+    print(f"\n  latency  p50 {statistics.median(times):.0f} ms   p95 {p95:.0f} ms")
 
     misses = [q for q in per_question if q["rank"] is None or q["rank"] > 5]
     if misses:
@@ -117,6 +147,7 @@ def main() -> None:
     sub = parser.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run")
     r.add_argument("name")
+    r.add_argument("--method", default="dense", choices=["dense", "bm25", "hybrid", "rerank"])
     r.add_argument("--class-filter", action="store_true",
                    help="restrict search to the question's component class")
     c = sub.add_parser("compare")
@@ -125,7 +156,7 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.cmd == "run":
-        run(args.name, args.class_filter)
+        run(args.name, args.method, args.class_filter)
     else:
         compare(args.a, args.b)
 
